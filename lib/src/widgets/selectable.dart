@@ -231,20 +231,16 @@ class SelectableMath extends StatelessWidget {
       effectiveTextStyle = DefaultTextStyle.of(context).style.merge(textStyle);
     }
     if (MediaQuery.boldTextOf(context)) {
-      effectiveTextStyle = effectiveTextStyle
-          .merge(const TextStyle(fontWeight: FontWeight.bold));
+      effectiveTextStyle = effectiveTextStyle.merge(const TextStyle(fontWeight: FontWeight.bold));
     }
 
-    final textScaleFactor =
-        this.textScaleFactor ?? MediaQuery.textScaleFactorOf(context);
+    final textScaleFactor = this.textScaleFactor ?? MediaQuery.textScaleFactorOf(context);
 
     final options = this.options ??
         MathOptions(
           style: mathStyle,
           fontSize: effectiveTextStyle.fontSize! * textScaleFactor,
-          mathFontOptions: effectiveTextStyle.fontWeight != FontWeight.normal && effectiveTextStyle.fontWeight != null
-              ? FontOptions(fontWeight: effectiveTextStyle.fontWeight!)
-              : null,
+          mathFontOptions: effectiveTextStyle.fontWeight != FontWeight.normal && effectiveTextStyle.fontWeight != null ? FontOptions(fontWeight: effectiveTextStyle.fontWeight!) : null,
           logicalPpi: logicalPpi,
           color: effectiveTextStyle.color!,
         );
@@ -255,9 +251,8 @@ class SelectableMath extends StatelessWidget {
     } on BuildException catch (e) {
       return onErrorFallback(e);
     } on Object catch (e) {
-      return onErrorFallback(
-          BuildException('Unsanitized build exception detected: $e.'
-              'Please report this error with correponding input.'));
+      return onErrorFallback(BuildException('Unsanitized build exception detected: $e.'
+          'Please report this error with correponding input.'));
     }
 
     final theme = Theme.of(context);
@@ -280,14 +275,11 @@ class SelectableMath extends StatelessWidget {
         textSelectionControls ??= cupertinoTextSelectionControls;
         paintCursorAboveText = true;
         cursorOpacityAnimates = true;
-        cursorColor ??= selectionTheme.cursorColor ??
-            CupertinoTheme.of(context).primaryColor;
-        selectionColor = selectionTheme.selectionColor ??
-            CupertinoTheme.of(context).primaryColor;
+        cursorColor ??= selectionTheme.cursorColor ?? CupertinoTheme.of(context).primaryColor;
+        selectionColor = selectionTheme.selectionColor ?? CupertinoTheme.of(context).primaryColor;
 
         cursorRadius ??= const Radius.circular(2.0);
-        cursorOffset = Offset(
-            iOSHorizontalOffset / MediaQuery.of(context).devicePixelRatio, 0);
+        cursorOffset = Offset(iOSHorizontalOffset / MediaQuery.of(context).devicePixelRatio, 0);
         break;
 
       case TargetPlatform.android:
@@ -299,8 +291,7 @@ class SelectableMath extends StatelessWidget {
         paintCursorAboveText = false;
         cursorOpacityAnimates = false;
         cursorColor ??= selectionTheme.cursorColor ?? theme.colorScheme.primary;
-        selectionColor =
-            selectionTheme.selectionColor ?? theme.colorScheme.primary;
+        selectionColor = selectionTheme.selectionColor ?? theme.colorScheme.primary;
 
         break;
     }
@@ -330,8 +321,7 @@ class SelectableMath extends StatelessWidget {
   }
 
   /// Default fallback function for [Math], [SelectableMath]
-  static Widget defaultOnErrorFallback(FlutterMathException error) =>
-      Math.defaultOnErrorFallback(error);
+  static Widget defaultOnErrorFallback(FlutterMathException error) => Math.defaultOnErrorFallback(error);
 }
 
 /// The internal widget for [SelectableMath] when no errors are encountered.
@@ -401,17 +391,8 @@ class InternalSelectableMath extends StatefulWidget {
   InternalSelectableMathState createState() => InternalSelectableMathState();
 }
 
-class InternalSelectableMathState extends State<InternalSelectableMath>
-    with
-        AutomaticKeepAliveClientMixin,
-        FocusManagerMixin,
-        SelectionManagerMixin,
-        SelectionOverlayManagerMixin,
-        WebSelectionControlsManagerMixin,
-        SingleTickerProviderStateMixin,
-        CursorTimerManagerMixin {
-  TextSelectionControls get textSelectionControls =>
-      widget.textSelectionControls;
+class InternalSelectableMathState extends State<InternalSelectableMath> with AutomaticKeepAliveClientMixin, FocusManagerMixin, SelectionManagerMixin, SelectionOverlayManagerMixin, WebSelectionControlsManagerMixin, SingleTickerProviderStateMixin, CursorTimerManagerMixin {
+  TextSelectionControls get textSelectionControls => widget.textSelectionControls;
 
   FocusNode? _focusNode;
 
@@ -468,8 +449,7 @@ class InternalSelectableMathState extends State<InternalSelectableMath>
     controller.dispose();
   }
 
-  void onSelectionChanged(
-      TextSelection selection, SelectionChangedCause? cause) {
+  void onSelectionChanged(TextSelection selection, SelectionChangedCause? cause) {
     switch (Theme.of(context).platform) {
       case TargetPlatform.iOS:
       case TargetPlatform.macOS:
@@ -587,20 +567,11 @@ class SelectionStyle {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is SelectionStyle &&
-        o.cursorColor == cursorColor &&
-        o.cursorOffset == cursorOffset &&
-        o.cursorRadius == cursorRadius &&
-        o.cursorWidth == cursorWidth &&
-        o.cursorHeight == cursorHeight &&
-        o.hintingColor == hintingColor &&
-        o.paintCursorAboveText == paintCursorAboveText &&
-        o.selectionColor == selectionColor &&
-        o.showCursor == showCursor;
+    return o is SelectionStyle && o.cursorColor == cursorColor && o.cursorOffset == cursorOffset && o.cursorRadius == cursorRadius && o.cursorWidth == cursorWidth && o.cursorHeight == cursorHeight && o.hintingColor == hintingColor && o.paintCursorAboveText == paintCursorAboveText && o.selectionColor == selectionColor && o.showCursor == showCursor;
   }
 
   @override
-  int get hashCode => hashValues(
+  int get hashCode => Object.hash(
         cursorColor,
         cursorOffset,
         cursorRadius,

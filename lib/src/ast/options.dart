@@ -100,12 +100,8 @@ class MathOptions {
     // required this.maxSize,
     // required this.minRuleThickness,
   }) {
-    final effectiveFontSize = fontSize ??
-        (logicalPpi == null
-            ? _defaultPtPerEm / Unit.lp.toPt!
-            : defaultFontSizeFor(logicalPpi: logicalPpi));
-    final effectiveLogicalPPI =
-        logicalPpi ?? defaultLogicalPpiFor(fontSize: effectiveFontSize);
+    final effectiveFontSize = fontSize ?? (logicalPpi == null ? _defaultPtPerEm / Unit.lp.toPt! : defaultFontSizeFor(logicalPpi: logicalPpi));
+    final effectiveLogicalPPI = logicalPpi ?? defaultLogicalPpiFor(fontSize: effectiveFontSize);
     return MathOptions._(
       fontSize: effectiveFontSize,
       logicalPpi: effectiveLogicalPPI,
@@ -138,12 +134,10 @@ class MathOptions {
   static const defaultFontSize = _defaultPtPerEm / _defaultLpPerPt;
 
   /// Default value for [logicalPpi] when [fontSize] has been set.
-  static double defaultLogicalPpiFor({required double fontSize}) =>
-      fontSize * Unit.inches.toPt! / _defaultPtPerEm;
+  static double defaultLogicalPpiFor({required double fontSize}) => fontSize * Unit.inches.toPt! / _defaultPtPerEm;
 
   /// Default value for [fontSize] when [logicalPpi] has been set.
-  static double defaultFontSizeFor({required double logicalPpi}) =>
-      _defaultPtPerEm / Unit.inches.toPt! * logicalPpi;
+  static double defaultFontSizeFor({required double logicalPpi}) => _defaultPtPerEm / Unit.inches.toPt! * logicalPpi;
 
   /// Default options for displayed equations
   static final displayOptions = MathOptions._(
@@ -216,8 +210,7 @@ class MathOptions {
   /// given font differences
   MathOptions withTextFont(PartialFontOptions font) => this.copyWith(
         mathFontOptions: null,
-        textFontOptions:
-            (this.textFontOptions ?? FontOptions()).mergeWith(font),
+        textFontOptions: (this.textFontOptions ?? FontOptions()).mergeWith(font),
       );
 
   /// Returns [MathOptions] with given math font
@@ -302,12 +295,7 @@ class OptionsDiff {
   });
 
   /// Whether this diff has no effect.
-  bool get isEmpty =>
-      style == null &&
-      color == null &&
-      size == null &&
-      textFontOptions == null &&
-      mathFontOptions == null;
+  bool get isEmpty => style == null && color == null && size == null && textFontOptions == null && mathFontOptions == null;
 
   /// Strip the style change.
   OptionsDiff removeStyle() {
@@ -388,16 +376,11 @@ class FontOptions {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is FontOptions &&
-        o.fontFamily == fontFamily &&
-        o.fontWeight == fontWeight &&
-        o.fontShape == fontShape &&
-        listEquals(o.fallback, fallback);
+    return o is FontOptions && o.fontFamily == fontFamily && o.fontWeight == fontWeight && o.fontShape == fontShape && listEquals(o.fallback, fallback);
   }
 
   @override
-  int get hashCode =>
-      hashValues(fontFamily.hashCode, fontWeight.hashCode, fontShape.hashCode);
+  int get hashCode => Object.hash(fontFamily.hashCode, fontWeight.hashCode, fontShape.hashCode);
 }
 
 /// Difference between the current [FontOptions] and the desired [FontOptions].
@@ -423,13 +406,9 @@ class PartialFontOptions {
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
-    return o is PartialFontOptions &&
-        o.fontFamily == fontFamily &&
-        o.fontWeight == fontWeight &&
-        o.fontShape == fontShape;
+    return o is PartialFontOptions && o.fontFamily == fontFamily && o.fontWeight == fontWeight && o.fontShape == fontShape;
   }
 
   @override
-  int get hashCode =>
-      hashValues(fontFamily.hashCode, fontWeight.hashCode, fontShape.hashCode);
+  int get hashCode => Object.hash(fontFamily.hashCode, fontWeight.hashCode, fontShape.hashCode);
 }
